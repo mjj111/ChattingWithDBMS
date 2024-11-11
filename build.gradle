@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.11'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'shardingTest'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//MongoDB
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	// Spring Boot JPA와 MySQL 커넥터
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+	// Apache ShardingSphere (샤딩 라이브러리)
+	implementation 'org.apache.shardingsphere:shardingsphere-jdbc-core:5.4.0'
+
+	// Spring Boot Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// JUnit Platform
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
